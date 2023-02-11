@@ -14,7 +14,7 @@ Queue Queue_Init() {
 void Queue_Push(Queue* queue, Data value) {
 
     Validator(!((queue -> tail == queue -> head) && (queue -> data_size != 0)), fprintf(stderr, "\t| " Blue " \tQueue is overflow: you"
-    "can't pop elements from queue." Grey "\n\t|\n"); return ;);
+    "can't push elements in queue." Grey "\n\t|\n"); return ;);
 
     queue -> data[queue -> tail] = value;
     queue -> data_size ++;
@@ -25,15 +25,15 @@ void Queue_Push(Queue* queue, Data value) {
 Data Queue_Pop(Queue* queue) {
 
     Validator(queue -> data_size, fprintf(stderr, "\t| " Blue " \tQueue is overflow: you can't pop elements from queue." Grey "\n\t|\n"
-    "\n\t|\n"); return INVALID_DATA_SIZE;);
-
+    ""); return INVALID_DATA_SIZE;);
+    
     Data ret_value = queue -> data[queue -> head];
     Validator (ret_value >= 0, fprintf(stderr, "\t| " Blue " \tThere can be only positive number in queue." Grey "\n\t|\n");
     return INVALID_POP_VALUE;);
-   
 
     queue -> data[queue -> head] *= -1;
     queue -> head ++;
+    queue -> head = queue -> head & Tail_max_value;
     queue -> data_size --;
     return ret_value;
 }
