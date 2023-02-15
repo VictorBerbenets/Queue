@@ -4,15 +4,11 @@ int main() {
 
     Queue queue = Queue_Init();
 
-    for (int i = 0; i < 1026; i++) {
+    const int size = 1001;
+    
+    for (int i = 0; i < size; i++) {
         Queue_Push(&queue, i);
     }
-
-    Queue_Pop(&queue);
-    Queue_Pop(&queue);
-    Queue_Pop(&queue);
-    Queue_Pop(&queue);
-    Queue_Pop(&queue);
 
     Queue_Log(&queue);
 
@@ -20,9 +16,12 @@ int main() {
     Queue_Push(&queue, 532);
     Queue_Push(&queue, 634);
 
-    for (int i = 0; i < 1026; i++) {
+    for (int i = 0; i < size; i++) {
         Queue_Pop(&queue);
     }
+
+    Queue_Pop(&queue);
+
 
     Queue_Log(&queue);
 

@@ -24,17 +24,18 @@ void Queue_Push(Queue* queue, Data value) {
 
 Data Queue_Pop(Queue* queue) {
 
-    Validator(queue -> data_size, fprintf(stderr, "\t| " Blue " \tQueue is overflow: you can't pop elements from queue." Grey "\n\t|\n"
-    ""); return INVALID_DATA_SIZE;);
+    Validator(queue -> data_size != 0, fprintf(stderr, "\t| " Blue " \tQueue is empty: you can't pop elements from queue." Grey "\n\t|\n"
+    ""); return ;);
     
     Data ret_value = queue -> data[queue -> head];
     Validator (ret_value >= 0, fprintf(stderr, "\t| " Blue " \tThere can be only positive number in queue." Grey "\n\t|\n");
-    return INVALID_POP_VALUE;);
+    return ;);
 
     queue -> data[queue -> head] *= -1;
     queue -> head ++;
     queue -> head = queue -> head & Tail_max_value;
     queue -> data_size --;
+
     return ret_value;
 }
 
@@ -50,6 +51,9 @@ void _Queue_Log(Queue* queue, int line, const char* func_name) {
     fprintf(Log_Queue, "queue's tail      = %d\n", queue -> tail);
     fprintf(Log_Queue, "queue's head      = %d\n", queue -> head);
     fprintf(Log_Queue, "queue's data_size = %zd\n", queue -> data_size);
+
+    fprintf(Log_Queue, "        Queue elemenst:\n");
+
     for (size_t number = 0; number < queue -> data_size; number++) {
         fprintf(Log_Queue, "[%zd] = %lg\n", queue -> head + number, queue -> data[queue -> head + number]);
     }
