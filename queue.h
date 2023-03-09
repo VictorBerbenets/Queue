@@ -31,31 +31,31 @@ public:
         this->capacity = queue_size;
         this->size     = 0;
     }
-    void SeTtail(short tail) {
+    void SetTail(short tail) {
         this->tail = tail;
     }
-    void SeThead(short head) {
+    void SetHead(short head) {
         this->head = head;
     }
-    short GeTtail() {
+    short GetTail() {
         return tail;
     }
-    short GeThead() {
+    short GetHead() {
         return head;
     }
-    size_t GeTsize() {
+    size_t GetSize() {
         return size;
     }
-    size_t GeTcapacity() {
+    size_t GetCapacity() {
         return capacity;
     }
-    void SeTsize(int value) {
+    void SetSize(int value) {
         this->size = value;
     }
-    void SeTdata_value(int value_id, elem_t value) {
-        this->data[value_id] = value;
+    void Push(elem_t value) {
+        this->data[this->tail] = value;
     }
-    elem_t GeTdata_value(int value_id) {
+    elem_t GetDataValue(int value_id) {
         return this->data[value_id];
     } 
     ~Queue () {
@@ -75,17 +75,17 @@ enum Queue_Errors {
 
 } ;
 
-Queue Queue_Init();
+Queue QueueInit();
 
-void Queue_Push(Queue* queue, elem_t value);
+void QueuePush(Queue* queue, elem_t value);
 
-elem_t Queue_Pop(Queue* queue);
+elem_t QueuePop(Queue* queue);
 
-void _Queue_Log(Queue* queue, int line, const char* func_name);
+void _QueueLog(Queue* queue, int line, const char* func_name);
 
 //add size, empty
 //get elem(top) //check cppreference
 
-#define Queue_Log(queue) _Queue_Log(queue, __LINE__, __PRETTY_FUNCTION__);
+#define QueueLog(queue) _QueueLog(queue, __LINE__, __PRETTY_FUNCTION__);
 
 #endif

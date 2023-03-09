@@ -36,23 +36,23 @@ int main() {
     const int size = 1001;
     
     for (int i = 0; i < size; i++) {
-        Queue_Push(&queue, i);
+        QueuePush(&queue, i);
     }
 
-    Queue_Log(&queue);
+    QueueLog(&queue);
 
-    Queue_Push(&queue, 412);
-    Queue_Push(&queue, 532);
-    Queue_Push(&queue, 634);
+    QueuePush(&queue, 412);
+    QueuePush(&queue, 532);
+    QueuePush(&queue, 634);
 
     for (int i = 0; i < size; i++) {
-        Queue_Pop(&queue);
+        QueuePop(&queue);
     }
 
-    Queue_Pop(&queue);
+    QueuePop(&queue);
 
 
-    Queue_Log(&queue);
+    QueueLog(&queue);
 
     return 0;
 }
