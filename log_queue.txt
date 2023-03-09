@@ -1,9 +1,10 @@
 
 *****************************************************Queue_Info*************************************************************************************
-_Queue_Log was called from '12' line and function: 'int main()'
+_Queue_Log was called from '42' line and function: 'int main()'
 queue's tail      = 1001
 queue's head      = 0
-queue's data_size = 1001
+queue's size      = 1001
+queue's capacity  = 1024
         Queue elemenst:
 [0] = 0
 [1] = 1
@@ -1010,12 +1011,13 @@ queue's data_size = 1001
 
 
 *****************************************************Queue_Info*************************************************************************************
-_Queue_Log was called from '25' line and function: 'int main()'
+_Queue_Log was called from '55' line and function: 'int main()'
 queue's tail      = 1004
 queue's head      = 1002
-queue's data_size = 2
+queue's size      = 2
+queue's capacity  = 1024
         Queue elemenst:
 [1002] = 532
-[1003] = 634
+[1003] = 533
 ****************************************************************************************************************************************************
 

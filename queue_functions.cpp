@@ -1,40 +1,32 @@
 #include "queue.h"
 
-Queue Queue_Init() {
 
-    Queue queue     = {};
+void Queue_Push(Queue* queue, elem_t value) {
 
-    queue.data_size = 0;
-    queue.head      = 0;
-    queue.tail      = 0;
-
-    return queue;
-}
-
-void Queue_Push(Queue* queue, Data value) {
-
-    Validator(!((queue -> tail == queue -> head) && (queue -> data_size != 0)), fprintf(stderr, "\t| " Blue " \tQueue is overflow: you"
+    Validator(!((queue->GeTtail() == queue->GeThead()) && (queue->GeTsize() != 0)), fprintf(stderr, "\t| " Blue " \tQueue is overflow: you"
     "can't push elements in queue." Grey "\n\t|\n"); return ;);
 
-    queue -> data[queue -> tail] = value;
-    queue -> data_size ++;
-    queue -> tail      ++;
-    queue -> tail = queue -> tail & Tail_max_value;
+    queue->SeTdata_value(queue->GeTtail(), value);
+    queue->SeTsize(queue->GeTsize() + 1);
+    queue->SeTtail(queue->GeTtail() + 1);
+    queue->SeTtail(queue->GeTtail() & Tail_max_value);
+    fprintf(stderr, "line = %d\n", __LINE__);
 }
 
-Data Queue_Pop(Queue* queue) {
+elem_t Queue_Pop(Queue* queue) {
 
-    Validator(queue -> data_size != 0, fprintf(stderr, "\t| " Blue " \tQueue is empty: you can't pop elements from queue." Grey "\n\t|\n"
-    ""); return ;);
+    Validator(queue->GeTsize() != 0, fprintf(stderr, "\t| " Blue " \tQueue is empty: you can't pop elements from queue." Grey "\n\t|\n"
+    ""); return 87;);
     
-    Data ret_value = queue -> data[queue -> head];
+    elem_t ret_value = queue->GeTdata_value(queue->GeThead());
     Validator (ret_value >= 0, fprintf(stderr, "\t| " Blue " \tThere can be only positive number in queue." Grey "\n\t|\n");
-    return ;);
+    return 96;);
 
-    queue -> data[queue -> head] *= -1;
-    queue -> head ++;
-    queue -> head = queue -> head & Tail_max_value;
-    queue -> data_size --;
+    queue->SeTdata_value(queue->GeThead(), queue->GeTdata_value(queue->GeThead()) * (-1));
+    queue->SeThead(queue->GeThead() + 1);
+
+    queue->SeThead(queue->GeThead() & Tail_max_value);
+    queue->SeTsize(queue->GeTsize() - 1);
 
     return ret_value;
 }
@@ -48,14 +40,14 @@ void _Queue_Log(Queue* queue, int line, const char* func_name) {
     "*****************************************\n");
     
     fprintf(Log_Queue, "%s was called from '%d' line and function: '%s'\n", __FUNCTION__, line, func_name);
-    fprintf(Log_Queue, "queue's tail      = %d\n", queue -> tail);
-    fprintf(Log_Queue, "queue's head      = %d\n", queue -> head);
-    fprintf(Log_Queue, "queue's data_size = %zd\n", queue -> data_size);
-
+    fprintf(Log_Queue, "queue's tail      = %d\n", queue->GeTtail());
+    fprintf(Log_Queue, "queue's head      = %d\n", queue->GeThead());
+    fprintf(Log_Queue, "queue's size      = %zd\n", queue->GeTsize());
+    fprintf(Log_Queue, "queue's capacity  = %zd\n", queue->GeTcapacity());
     fprintf(Log_Queue, "        Queue elemenst:\n");
 
-    for (size_t number = 0; number < queue -> data_size; number++) {
-        fprintf(Log_Queue, "[%zd] = %lg\n", queue -> head + number, queue -> data[queue -> head + number]);
+    for (size_t number = 0; number < queue->GeTsize(); number++) {
+        fprintf(Log_Queue, "[%zd] = %lg\n", queue->GeThead() + number, queue->GeTdata_value(queue->GeThead()) + number);
     }
 
     fprintf(Log_Queue, "**************************************************************************************************************"

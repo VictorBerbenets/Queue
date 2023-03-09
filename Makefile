@@ -4,13 +4,13 @@ CFLAGS = -c -Wall -Wextra
 
 all : Queue
 
-Queue : queue_functions.o  queue.o
-	$(CC) queue_functions.o  queue.o  -o Queue
+Queue : queue_functions.o  main.o
+	$(CC) queue_functions.o  main.o  -o Queue
 
 queue_functions.o : queue_functions.cpp
 	$(CC) $(CFLAGS) $^
 	
-queue.o : queue.cpp
+main.o : main.cpp
 	$(CC) $(CFLAGS) $^
 
 clean:
