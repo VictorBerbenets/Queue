@@ -1,7 +1,7 @@
 #include "queue.h"
 
 
-void QueuePush(Queue* queue, elem_t value) {
+void Queue::QueuePush(Queue* queue, elem_t value) {
 
     Validator(!((queue->GetTail() == queue->GetHead()) && (queue->GetSize() != 0)), fprintf(stderr, "\t| " Blue " \tQueue is overflow: you"
     "can't push elements in queue." Grey "\n\t|\n"); return ;);
@@ -12,7 +12,7 @@ void QueuePush(Queue* queue, elem_t value) {
     queue->SetTail(queue->GetTail() & Tail_max_value);
 }
 
-elem_t QueuePop(Queue* queue) {
+elem_t Queue::QueuePop(Queue* queue) {
 
     Validator(queue->GetSize() != 0, fprintf(stderr, "\t| " Blue " \tQueue is empty: you can't pop elements from queue." Grey "\n\t|\n"
     ""); return 87;);
@@ -21,7 +21,6 @@ elem_t QueuePop(Queue* queue) {
     Validator (ret_value >= 0, fprintf(stderr, "\t| " Blue " \tThere can be only positive number in queue." Grey "\n\t|\n");
     return 96;);
 
-    // queue->SetDataValue(queue->GetHead(), queue->GetDataValue(queue->GetHead()) * (-1));
     queue->SetHead(queue->GetHead() + 1);
 
     queue->SetHead(queue->GetHead() & Tail_max_value);
@@ -30,7 +29,7 @@ elem_t QueuePop(Queue* queue) {
     return ret_value;
 }
 
-void _QueueLog(Queue* queue, int line, const char* func_name) {
+void Queue::_QueueLog(Queue* queue, int line, const char* func_name) {
 
     FILE* Log_Queue = fopen("log_queue.txt", "a");
     Validator(Log_Queue != nullptr, exit(EXIT_FAILURE));
@@ -53,4 +52,40 @@ void _QueueLog(Queue* queue, int line, const char* func_name) {
     "**************************************\n\n");
     char is_file_close = fclose(Log_Queue);
     Validator(is_file_close == 0, exit(EXIT_FAILURE));
+}
+
+void Queue::SetTail(short tail) {
+    tail_ = tail;
+}
+
+void Queue::SetHead(short head) {
+    this->head_ = head;
+}
+
+short Queue::GetTail() {
+    return tail_;
+}
+
+short Queue::GetHead() {
+    return head_;
+}
+
+size_t Queue::GetSize() {
+    return size_;
+}
+
+size_t Queue::GetCapacity() {
+    return capacity_;
+}
+
+void Queue::SetSize(int value) {
+    this->size_ = value;
+}
+
+void Queue::Push(elem_t value) {
+    this->data_[this->tail_] = value;
+}
+
+elem_t Queue::GetDataValue(int value_id) {
+    return this->data_[value_id];
 }
