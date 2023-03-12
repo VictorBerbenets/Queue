@@ -7,67 +7,61 @@
 #include "validator.h"
 #include <iostream>
 
-using namespace std;
 
 typedef double elem_t;
-
 const short Queue_Size     = 1024;
 const short Tail_max_value = Queue_Size - 1;
 
-class Queue {
-private:
-    short tail;
-    short head;
-    elem_t* data;
-    size_t size;
-    size_t capacity;
+
+class Queue { 
+
 
 public:
     Queue (int queue_size) {
-
-        this->data = new elem_t[queue_size];
-        this->tail = 0;
-        this->head = 0;
-        this->capacity = queue_size;
-        this->size     = 0;
-    }
-    void SetTail(short tail) {
-        this->tail = tail;
+        capacity_ = queue_size;
+        data_     = new elem_t[capacity_];
     }
     void SetHead(short head) {
-        this->head = head;
+        this->head_ = head;
     }
     short GetTail() {
-        return tail;
+        return tail_;
     }
     short GetHead() {
-        return head;
+        return head_;
     }
     size_t GetSize() {
-        return size;
+        return size_;
     }
     size_t GetCapacity() {
-        return capacity;
+        return capacity_;
     }
     void SetSize(int value) {
-        this->size = value;
+        this->size_ = value;
     }
     void Push(elem_t value) {
-        this->data[this->tail] = value;
+        this->data_[this->tail_] = value;
     }
     elem_t GetDataValue(int value_id) {
-        return this->data[value_id];
+        return this->data_[value_id];
     } 
-    ~Queue () {
-        delete [] this->data;
-        this->tail = 0;
-        this->tail = 0;
-        this->capacity = 0;
-        this->size     = 0;
-
+    void SetTail(short tail) {
+        this->tail_ = tail;
     }
-};
+    ~Queue () {
+        delete [] this->data_;
+    }
 
+private:
+
+    elem_t* data_    = nullptr;
+    size_t capacity_ = 0;   
+    size_t size_     = 0;
+    short tail_      = 0;
+    short head_      = 0;
+
+    // void SetTail(short tail);
+};
 enum Queue_Errors {
     
     INVALID_DATA_SIZE = 0xDEADBEEF1,
@@ -76,8 +70,6 @@ enum Queue_Errors {
 } ;
 
 Queue QueueInit();
-
-void QueuePush(Queue* queue, elem_t value);
 
 elem_t QueuePop(Queue* queue);
 
